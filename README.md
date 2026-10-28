@@ -1,8 +1,7 @@
 <h1>ExpNo 1 :Developing AI Agent with PEAS Description</h1>
-<h3>Name: konduru santhosh
-<h3>Register Number: 212225240074
-  
-## Date: 28/10/2026
+<h3>Name: konduru santhosh</h3>
+<h3>Register Number: 212225240074</h3>
+
 
 <h3>AIM:</h3>
 <br>
@@ -42,53 +41,71 @@
 <h3>STEP 5:</h3>
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
 
-# Program:
+<h3>Program:</h3>
 
-```
+
+
+
+~~~
 import random
-class MedicinePrescribingAgent:
-    def __init__(self):
-        self.rooms = {
-            "Room 1": random.uniform(97.0, 102.5),
-            "Room 2": random.uniform(97.0, 102.5)
-        }
-        self.performance = 0
-        self.current_room = random.choice(list(self.rooms.keys()))
-    def sense(self):
-        """Sense current room and patient's temperature."""
-        temperature = self.rooms[self.current_room]
-        print(f"\nAgent is in {self.current_room}")
-        print(f"Patient Temperature: {temperature:.1f}°F")
-        return temperature
-    def prescribe_medicine(self, temperature):
-        """Treat patient if temperature is above 98.5°F."""
-        if temperature > 98.5:
-            print("Patient has fever.")
-            print("Medicine Prescribed.")
-            self.performance += 1
+class HealthMonitoringAgent:
+    def __init__(self, patient_data):
+        self.patient_data = patient_data
+      
+
+    def monitor_health(self):
+        while True:
+            current_health_state = self.sensors.get_health_state()
+            action = self.choose_action(current_health_state)
+            self.actuators.perform_action(action)
+
+            if action == "No specific action needed":
+                break
+
+    def choose_action(self, current_health_state):
+        if current_health_state['heart_rate'] > 120:
+            return "Alert healthcare provider: High heart rate detected"
+        elif current_health_state['blood_pressure'] > 140:
+            return "Alert healthcare provider: High blood pressure detected"
+        elif current_health_state['temperature'] > 38:
+            return "Recommend rest and monitor temperature"
         else:
-            print("Patient is healthy.")
-            print("No medicine required.")
-    def move(self):
-        """Move to the other room."""
-        previous_room = self.current_room
-        self.current_room = "Room 2" if self.current_room == "Room 1" else "Room 1"
-        print(f"\nMoving from {previous_room} to {self.current_room}")
-        self.performance -= 1
-    def run(self):
-        print("=== Medicine Prescribing Agent ===")
-        temperature = self.sense()
-        self.prescribe_medicine(temperature)
-        self.move()
-        temperature = self.sense()
-        self.prescribe_medicine(temperature)
-        print("\nFinal Performance:", self.performance)
-agent = MedicinePrescribingAgent()
-agent.run()
-```
+            return "No specific action needed"
 
-# Output:
-<img width="377" height="487" alt="image" src="https://github.com/user-attachments/assets/620a9cc2-95e3-483d-9dbf-fbe08d37acb8" />
+~~~
+~~~
+class HealthSensors:
+    def get_health_state(self):
+        return {
+            'heart_rate': random.randint(60, 150),
+            'blood_pressure': random.randint(90, 160),
+            'temperature': random.uniform(36.0, 38.5)
+        }
 
-# Result:
-Thus found the PEAS description for 
+
+class HealthActuators:
+    def perform_action(self, action):
+        print(action)
+
+
+if __name__ == "__main__":
+    patient_data = {
+        'patient_id': 123,
+        'name': 'John Doe',
+        'age': 35
+    }
+    
+    health_sensors = HealthSensors()
+    health_actuators = HealthActuators()
+
+    health_monitoring_agent = HealthMonitoringAgent(patient_data)
+    health_monitoring_agent.sensors = health_sensors
+    health_monitoring_agent.actuators = health_actuators
+
+    health_monitoring_agent.monitor_health()
+~~~
+<h3>Output:</h3>
+<img width="582" height="92" alt="image" src="https://github.com/user-attachments/assets/75254eb9-bee4-4eab-96d3-310d674350a2" />
+
+<h3>Result:</h3>
+Thus found the PEAS description for the given AI problem and develop an AI agent.
